@@ -1,0 +1,7 @@
+services:
+  frontend:
+    image: armandoverduzco/arduino-remoto
+    container_name: frontend
+    restart: always
+    ports:
+      - "8080:80"
