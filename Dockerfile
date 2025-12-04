@@ -1,5 +1,6 @@
-# Etapa 1 — build del frontend
-FROM node:18 AS build
+# 1) Build React
+FROM --platform=linux/amd64 node:20-alpine AS build
+
 WORKDIR /app
 
 COPY package*.json ./
@@ -8,7 +9,10 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-# Etapa 2 — servidor nginx
-FROM nginx:stable
+# 2) Nginx para servir el frontend
+FROM --platform=linux/amd64 nginx:alpine
+
 COPY --from=build /app/dist /usr/share/nginx/html
+
 EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

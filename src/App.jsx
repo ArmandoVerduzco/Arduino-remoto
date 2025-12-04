@@ -25,10 +25,12 @@ export default function App() {
   const [humConnected, setHumConnected] = useState(false);
   const [distConnected, setDistConnected] = useState(false);
 
-  // 🚀 ENDPOINTS OPTIMIZADOS
+  // 🚀 ENDPOINTS OPTIMIZADOS + LED
   const [endpoints, setEndpoints] = useState({
     sensores: "http://192.168.1.78:8002/api/sensores/ultimos/",
-    control: "https://unanimous-postretinal-quincy.ngrok-free.dev/arduino/comando/"
+    control: "https://unanimous-postretinal-quincy.ngrok-free.dev/arduino/comando/",
+    ledOn: "http://192.168.1.78:8002/api/led/on/",
+    ledOff: "http://192.168.1.78:8002/api/led/off/"
   });
 
   // 🔥 REF para evitar peticiones concurrentes
