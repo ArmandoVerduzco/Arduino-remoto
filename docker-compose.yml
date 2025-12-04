@@ -1,8 +1,25 @@
+version: '3.8'
+
 services:
-  frontend:
+  arduino-frontend:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: arduino-monitor-frontend
     ports:
-      - "8080:80"
-    restart: always
+      - "3000:80"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    networks:
+      - arduino-network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  arduino-network:
+    driver: bridge
